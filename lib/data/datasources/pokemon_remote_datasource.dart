@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import '../models/pokemon_model.dart';
+import '../models/pokemon_detail_model.dart';
 
 class PokemonRemoteDataSource {
   PokemonRemoteDataSource(this._dio);
@@ -49,6 +50,16 @@ class PokemonRemoteDataSource {
   int _extractIdFromUrl(String url) {
     final segments = url.split('/');
     return int.parse(segments[segments.length - 2]);
+  }
+
+  Future<PokemonDetailModel> getPokemonDetail(int id) async {
+    try {
+      final response = await _dio.get('/pokemon/$id');
+
+      return PokemonDetailModel.fromJson(response.data);
+    } on DioException catch (e) {
+      throw _mapDioError(e);
+    }
   }
 
   NetworkException _mapDioError(DioException error) {

@@ -1,10 +1,12 @@
 import 'package:hive/hive.dart';
 import '../models/pokemon_model.dart';
+import '../models/pokemon_detail_model.dart';
 
 class PokemonLocalDataSource {
-  const PokemonLocalDataSource(this._box);
+  const PokemonLocalDataSource(this._box, this._detailBox);
 
   final Box<PokemonModel> _box;
+  final Box<PokemonDetailModel> _detailBox;
 
   Future<List<PokemonModel>> getPokemons({
     required int limit,
@@ -45,6 +47,22 @@ class PokemonLocalDataSource {
       await _box.clear();
     } catch (e) {
       throw CacheException('Error clearing cache: $e');
+    }
+  }
+
+  Future<PokemonDetailModel?> getPokemonDetail(int id) async {
+    try {
+      return _detailBox.get(id);
+    } catch (e) {
+      throw CacheException('Error reading detail from cache: $e');
+    }
+  }
+
+  Future<void> savePokemonDetail(PokemonDetailModel detail) async {
+    try {
+      await _detailBox.put(detail.id, detail);
+    } catch (e) {
+      throw CacheException('Error saving detail to cache: $e');
     }
   }
 }
