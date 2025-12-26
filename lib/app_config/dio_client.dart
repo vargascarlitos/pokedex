@@ -1,9 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:dio_cache_interceptor_hive_store/dio_cache_interceptor_hive_store.dart';
-import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class DioClient {
   DioClient._();
@@ -32,19 +30,19 @@ class DioClient {
 
   static Future<void> _setupInterceptors(Dio dio) async {
     // 1. Logging interceptor (debug only)
-    if (kDebugMode) {
-      dio.interceptors.add(
-        PrettyDioLogger(
-          requestHeader: true,
-          requestBody: true,
-          responseBody: true,
-          responseHeader: false,
-          error: true,
-          compact: true,
-          maxWidth: 90,
-        ),
-      );
-    }
+    // if (kDebugMode) {
+    //   dio.interceptors.add(
+    //     PrettyDioLogger(
+    //       requestHeader: true,
+    //       requestBody: true,
+    //       responseBody: true,
+    //       responseHeader: false,
+    //       error: true,
+    //       compact: true,
+    //       maxWidth: 90,
+    //     ),
+    //   );
+    // }
 
     // 2. Cache interceptor
     final cacheDir = await getTemporaryDirectory();
