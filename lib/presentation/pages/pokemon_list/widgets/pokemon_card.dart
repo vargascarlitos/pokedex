@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '../../../../domain/entities/pokemon.dart';
+import '../../pokemon_detail/pokemon_detail_page.dart';
 
 class PokemonCard extends StatelessWidget {
   const PokemonCard({super.key, required this.pokemon});
@@ -16,7 +17,12 @@ class PokemonCard extends StatelessWidget {
       elevation: 2,
       child: InkWell(
         onTap: () {
-          // Navigate to detail (will be implemented later)
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PokemonDetailPage(pokemon: pokemon),
+            ),
+          );
         },
         borderRadius: BorderRadius.circular(16),
         child: Padding(
