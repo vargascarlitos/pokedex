@@ -1,5 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import '../../domain/entities/pokemon.dart';
+import '../../domain/entities/pokemon_detail.dart';
 import '../../domain/repositories/pokemon_repository.dart';
 import '../datasources/pokemon_local_datasource.dart';
 import '../datasources/pokemon_remote_datasource.dart';
@@ -69,6 +70,35 @@ class PokemonRepositoryImpl implements PokemonRepository {
       await _localDataSource.savePokemons(remote);
     } catch (e) {
       // Silent fail for background updates
+    }
+  }
+
+  @override
+  Future<PokemonDetail> getPokemonDetail(int id) async {
+    final cached = await _localDataSource.getPokemonDetail(id);
+
+    if (cached != null) {
+      if (await _hasConnection()) {
+        _updateDetailCacheInBackground(id);
+      }
+      return cached.toEntity();
+    }
+
+    if (await _hasConnection()) {
+      final remote = await _remoteDataSource.getPokemonDetail(id);
+      await _localDataSource.savePokemonDetail(remote);
+      return remote.toEntity();
+    }
+
+    throw const NetworkException('Sin conexión y sin detalle en caché');
+  }
+
+  Future<void> _updateDetailCacheInBackground(int id) async {
+    try {
+      final remote = await _remoteDataSource.getPokemonDetail(id);
+      await _localDataSource.savePokemonDetail(remote);
+    } catch (e) {
+      // Silent fail
     }
   }
 }
