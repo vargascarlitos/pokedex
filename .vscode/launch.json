@@ -1,0 +1,126 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Pokédex (Chrome - Dev)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "args": [
+                "-d",
+                "chrome",
+                "html",
+                "--web-port",
+                "8080",
+                "--web-browser-flag",
+                "--disable-web-security",
+                "--web-browser-flag",
+                "--disable-gpu",
+                "--web-browser-flag",
+                "--no-sandbox"
+            ]
+        },
+        {
+            "name": "Pokédex (Chrome - Profile)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "flutterMode": "profile",
+            "args": [
+                "-d",
+                "chrome",
+                "--web-renderer",
+                "html",
+                "--web-port",
+                "8080",
+                "--web-browser-flag",
+                "--disable-web-security"
+            ]
+        },
+        {
+            "name": "Pokédex (Chrome - Release)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "flutterMode": "release",
+            "args": [
+                "-d",
+                "chrome",
+                "--web-renderer",
+                "canvaskit",
+                "--web-port",
+                "8080"
+            ]
+        },
+        {
+            "name": "Pokédex (Android - Dev)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "args": [
+                "-d",
+                "android"
+            ]
+        },
+        {
+            "name": "Pokédex (Android - Profile)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "flutterMode": "profile",
+            "args": [
+                "-d",
+                "android"
+            ]
+        },
+        {
+            "name": "Pokédex (Android - Release)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "flutterMode": "release",
+            "args": [
+                "-d",
+                "android"
+            ]
+        },
+        {
+            "name": "Pokédex (iOS - Dev)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "args": [
+                "-d",
+                "iphone"
+            ]
+        },
+        {
+            "name": "Pokédex (iOS - Profile)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "flutterMode": "profile",
+            "args": [
+                "-d",
+                "iphone"
+            ]
+        },
+        {
+            "name": "Pokédex (iOS - Release)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "flutterMode": "release",
+            "args": [
+                "-d",
+                "iphone"
+            ]
+        },
+        {
+            "name": "Pokédex (All Devices)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart"
+        }
+    ]
+}
