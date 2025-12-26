@@ -1,9 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/entities/pokemon.dart';
 import '../../bloc/pokemon_detail/pokemon_detail_cubit.dart';
 import '../../bloc/pokemon_detail/pokemon_detail_state.dart';
+import '../../widgets/pokemon_network_image.dart';
 import '../pokemon_list/widgets/error_display.dart';
 import 'widgets/abilities_section.dart';
 import 'widgets/measurements_card.dart';
@@ -62,14 +62,9 @@ class _PokemonDetailAppBar extends StatelessWidget {
           ),
           child: Hero(
             tag: 'pokemon-${pokemon.id}',
-            child: CachedNetworkImage(
+            child: PokemonNetworkImage(
               imageUrl: pokemon.imageUrl,
               fit: BoxFit.contain,
-              errorWidget: (context, url, error) => Icon(
-                Icons.catching_pokemon,
-                size: 100,
-                color: theme.colorScheme.onPrimary.withOpacity(0.3),
-              ),
             ),
           ),
         ),

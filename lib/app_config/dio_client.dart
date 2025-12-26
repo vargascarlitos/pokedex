@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:dio_cache_interceptor_hive_store/dio_cache_interceptor_hive_store.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:path_provider/path_provider.dart';
 
 class DioClient {
@@ -45,8 +46,15 @@ class DioClient {
     // }
 
     // 2. Cache interceptor
-    final cacheDir = await getTemporaryDirectory();
-    final cacheStore = HiveCacheStore(cacheDir.path);
+    final String cachePath;
+    if (kIsWeb) {
+      cachePath = 'pokedex_http_cache';
+    } else {
+      final cacheDir = await getTemporaryDirectory();
+      cachePath = cacheDir.path;
+    }
+    
+    final cacheStore = HiveCacheStore(cachePath);
 
     dio.interceptors.add(
       DioCacheInterceptor(
