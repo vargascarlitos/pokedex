@@ -2,6 +2,12 @@
 
 Aplicación Pokédex con soporte mobile (iOS/Android) y web, funciona completamente offline.
 
+
+
+https://github.com/user-attachments/assets/0fe5e8d4-cb72-47d0-b2d7-103069ab24e9
+
+
+
 ## Setup e Instalación
 
 ### Requisitos
